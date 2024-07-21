@@ -1,4 +1,3 @@
-
 product01 =input("Enter the first product name :")
 number01=int(input("Enter the Number of "+product01+": "))
 
@@ -26,16 +25,23 @@ while True:
         name = input("Enter the name of the product: ")
         quantity = int(input("Enter the quantity of the product: "))
         products[name] = products.get(name, 0) + quantity
+        print(f"Product '{name}' added. \n")
     elif action == "2":
-        name = input("Enter the name of the product: ")
-        quantity = int(input("Enter the quantity to sell: "))
-        if products.get(name, 0) >= quantity:
-            products[name] = products.get(name, 0) - quantity
+        for product in sorted(products.keys()):
+            print(f"{product}: {products[product]}")
+        name = input("Enter the name of the product to sell: ")
+        if name in products:
+            quantity = int(input("Enter the quantity to sell: "))
+            if quantity > products[name]:
+                print("Not enough products available.")
+            else:
+                products[name] = products.get(name, 0) - quantity
+                print(f"{quantity} units of {name} sold. ")
         else:
-            print("Not enough products available.")
+            print("Product not found.")
     elif action == "3":
-        for product, quantity in products.items():
-            print(f"{product}: {quantity}")
+        for product in sorted(products.keys()):
+            print(f"{product}: {products[product]}")
     elif action == "4":
         break
 '''
